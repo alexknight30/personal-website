@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Alex Knight</h1>
+            <nav class="main-nav">
+                <a href="#about" class="nav-link active">About</a> |
+                <a href="#projects" class="nav-link">Projects</a> |
+                <a href="#essays" class="nav-link">Essays</a> |
+                <a href="#food" class="nav-link">Food</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- About Section -->
+            <section id="about" class="content-section active">
+                <h2>About</h2>
+                <p>Hi there, my name is Alex. I'm a student at Claremont McKenna College studying Philosophy and Data Science. Here is my website.</p>
+                <p>My backround is almost exclusively in the hummanaties, but over the past year or so I've developed a lot of interest in computer science and and AI.</p>
+                <p>This is not a professional webiste. Here I share some projects I've done, random essays I've written, and food I've cooked. I hope you enjoy!</p>
+                <p>If you'd like to chat about my essays/projects or anything else, try my <a href="https://www.linkedin.com/in/alexknight2027/">LinkedIn</a>.</p>
+                <p>If you'd like to chat about Arden reach out here <a href="mailto:alex@aredentime.com">alex@aredentime.com</a></p>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="content-section">
+                <h2>Projects</h2>
+                <p>I do a fair amount of projects, both coding and otherwise. I've put some of my favorite ones here. I don't show any code here, just high-level overviews and images. My Github repos are private, but if you're interested in any code I'm always happy to share—just ask.</p>
+                
+                <div class="project-list">
+                    <div class="project-item">
+                        <h3><a href="#" class="project-link" onclick="toggleProject(this); return false;">E-Commerce Platform</a></h3>
+                        <div class="project-details">
+                            <p>A full-stack e-commerce solution. Built with React, Node.js, and MongoDB. Features user authentication, product management, shopping cart, and payment processing.</p>
+                            <p><em>Technologies: React, Node.js, MongoDB, Stripe</em></p>
+                        </div>
+                    </div>
+
+                    <div class="project-item">
+                        <h3><a href="#" class="project-link" onclick="toggleProject(this); return false;">Data Visualization Dashboard</a></h3>
+                        <div class="project-details">
+                            <p>Interactive dashboard for visualizing complex datasets. Uses D3.js and Chart.js with real-time updates and export functionality.</p>
+                            <p><em>Technologies: D3.js, Chart.js, Python, Flask</em></p>
+                        </div>
+                    </div>
+
+                    <div class="project-item">
+                        <h3><a href="#" class="project-link" onclick="toggleProject(this); return false;">Mobile Fitness App</a></h3>
+                        <div class="project-details">
+                            <p>Cross-platform mobile app for tracking workouts and nutrition. Includes workout planning, progress tracking, and wearable device integration.</p>
+                            <p><em>Technologies: React Native, Firebase, Redux, HealthKit</em></p>
+                        </div>
+                    </div>
+
+                    <div class="project-item">
+                        <h3><a href="#" class="project-link" onclick="toggleProject(this); return false;">AI Chatbot</a></h3>
+                        <div class="project-details">
+                            <p>Conversational AI chatbot using natural language processing. Capable of understanding context and learning from interactions.</p>
+                            <p><em>Technologies: Python, TensorFlow, NLP, WebSocket</em></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Essays Section -->
+            <section id="essays" class="content-section">
+                <h2>Essays</h2>
+                <p>In addition to projects I really enjoy writing. I usually write about whatever is on my mind. The essays are informal, and are not supposed to be polished at all.</p>
+                
+                <div class="essay-list">
+                    <div class="essay-item">
+                        <h3><a href="#" class="essay-link" onclick="toggleEssay(this); return false;">The Future of Artificial Intelligence</a></h3>
+                        <div class="essay-details">
+                            <p>An exploration of how AI is reshaping our world, from automation in the workplace to ethical considerations in decision-making algorithms.</p>
+                            <p><em>Published: March 2024 | Category: Technology</em></p>
+                        </div>
+                    </div>
+
+                    <div class="essay-item">
+                        <h3><a href="#" class="essay-link" onclick="toggleEssay(this); return false;">Digital Minimalism in the Age of Distraction</a></h3>
+                        <div class="essay-details">
+                            <p>A personal reflection on finding balance in our hyperconnected world. Discusses strategies for mindful technology use.</p>
+                            <p><em>Published: February 2024 | Category: Lifestyle</em></p>
+                        </div>
+                    </div>
+
+                    <div class="essay-item">
+                        <h3><a href="#" class="essay-link" onclick="toggleEssay(this); return false;">The Art of Learning</a></h3>
+                        <div class="essay-details">
+                            <p>Insights into effective learning strategies and the psychology of skill acquisition. How to optimize learning processes.</p>
+                            <p><em>Published: January 2024 | Category: Education</em></p>
+                        </div>
+                    </div>
+
+                    <div class="essay-item">
+                        <h3><a href="#" class="essay-link" onclick="toggleEssay(this); return false;">Building Meaningful Connections</a></h3>
+                        <div class="essay-details">
+                            <p>A reflection on the importance of authentic relationships in our digital age. How technology affects human connection.</p>
+                            <p><em>Published: December 2023 | Category: Relationships</em></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Food Section -->
+            <section id="food" class="content-section">
+                <h2>Food</h2>
+                <p>I love to cook. Here is some stuff I've made.</p>
+                
+                <div class="food-list">
+                    <div class="food-item">
+                        <img src="Photos/food1.jpg" alt="Homemade Pasta" class="food-image">
+                        <h3>Spaghetti pomodoro</h3>
+                    </div>
+
+                    <div class="food-item">
+                        <img src="Photos/food7.jpg" alt="Homemade Pasta" class="food-image">
+                        <h3>Chicken caprese</h3>
+                    </div>
+
+                    <div class="food-item">
+                        <img src="Photos/food3.jpg" alt="Homemade Pasta" class="food-image">
+                        <h3>Beet salad with burrata</h3>
+                    </div>
+               
+                    <div class="food-item">
+                        <img src="Photos/food4.jpg" alt="Homemade Pasta" class="food-image">
+                        <h3>Steak with peppercorn sauce</h3>
+                    </div>
+
+                    <div class="food-item">
+                        <img src="Photos/food5.jpg" alt="Homemade Pasta" class="food-image">
+                        <h3>Margherita</h3>
+                    </div>
+
+                    <div class="food-item">
+                        <img src="Photos/food6.jpg" alt="Homemade Pasta" class="food-image">
+                        <h3>Spaghetti carbonara</h3>
+                    </div>
+
+                    <div class="food-item">
+                        <img src="Photos/food11.jpg" alt="Homemade Pasta" class="food-image">
+                        <h3>Pork belly bao and plum sauce</h3>
+                    </div>
+
+                    <div class="food-item">
+                        <img src="Photos/food8.jpg" alt="Homemade Pasta" class="food-image">
+                        <h3>More (and slightly different) spaghetti pomodoro</h3>
+                    </div>
+
+                    <div class="food-item">
+                        <img src="Photos/food9.jpg" alt="Homemade Pasta" class="food-image">
+                        <h3>Butternut squash ravioli</h3>
+                    </div>
+
+                    <div class="food-item">
+                        <img src="Photos/food10.jpg" alt="Homemade Pasta" class="food-image">
+                        <h3>Chicken al pastor tacos with pineapple</h3>
+                    </div>
+
+                    <div class="food-item">
+                        <img src="Photos/food2.jpg" alt="Homemade Pasta" class="food-image">
+                        <h3>Lamb, beets and burrata, potato, and hummus</h3>
+                    </div>
+                    
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2025</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
