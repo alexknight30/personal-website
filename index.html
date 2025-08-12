@@ -12,68 +12,54 @@
             <h1>Alex Knight</h1>
             <nav class="main-nav">
                 <a href="#about" class="nav-link active">About</a> |
-                <a href="#projects" class="nav-link">Projects</a> |
                 <a href="#essays" class="nav-link">Essays</a> |
                 <a href="#food" class="nav-link">Food</a>
             </nav>
+            <div class="ticker"><marquee behavior="scroll" direction="left" scrollamount="3"><span id="yay-html" class="ticker-egg">Yay HTML!</span></marquee></div>
         </header>
 
         <main>
+            <div id="copy-toast" class="copy-toast" role="status" aria-live="polite">Copied to clipboard</div>
             <!-- About Section -->
             <section id="about" class="content-section active">
                 <h2>About</h2>
-                <p>Hi there, my name is Alex. I'm a student at Claremont McKenna College studying Philosophy and Data Science. Here is my website.</p>
-                <p>My backround is almost exclusively in the hummanaties, but over the past year or so I've developed a lot of interest in computer science and and AI.</p>
-                <p>This is not a professional webiste. Here I share some projects I've done, random essays I've written, and food I've cooked. I hope you enjoy!</p>
-                <p>If you'd like to chat about my essays/projects or anything else, try my <a href="https://www.linkedin.com/in/alexknight2027/">LinkedIn</a>.</p>
-                <p>If you'd like to chat about Arden reach out here <a href="mailto:alex@aredentime.com">alex@aredentime.com</a></p>
-            </section>
-
-            <!-- Projects Section -->
-            <section id="projects" class="content-section">
-                <h2>Projects</h2>
-                <p>I do a fair amount of projects, both coding and otherwise. I've put some of my favorite ones here. I don't show any code here, just high-level overviews and images. My Github repos are private, but if you're interested in any code I'm always happy to share—just ask.</p>
-                
-                <div class="project-list">
-                    <div class="project-item">
-                        <h3><a href="#" class="project-link" onclick="toggleProject(this); return false;">E-Commerce Platform</a></h3>
-                        <div class="project-details">
-                            <p>A full-stack e-commerce solution. Built with React, Node.js, and MongoDB. Features user authentication, product management, shopping cart, and payment processing.</p>
-                            <p><em>Technologies: React, Node.js, MongoDB, Stripe</em></p>
-                        </div>
+                <div class="about-layout">
+                    <div class="about-main">
+                        <p>Hi there, my name is Alex. I'm a student at Claremont McKenna College studying Philosophy and Data Science. Here is my website.</p>
+                        <p>My background is almost exclusively in the humanities, but over the past year or so I've developed a lot of interest in computer science and AI. I've also always loved math and such so that doesn't hurt!</p>
+                        <p>This is not a professional website. Here, I share some random essays I've written and food I've cooked. I hope you enjoy! Also, that is me on the right pretending to be interested in physics --> </p>
+                        <p>If you'd like to chat about my essays or anything else, try my <a href="https://www.linkedin.com/in/alexknight2027/">LinkedIn</a>.</p>
+                        <p>If you'd like to chat about Arden reach out here <a href="mailto:alex@aredentime.com">alex@aredentime.com</a></p>
                     </div>
-
-                    <div class="project-item">
-                        <h3><a href="#" class="project-link" onclick="toggleProject(this); return false;">Data Visualization Dashboard</a></h3>
-                        <div class="project-details">
-                            <p>Interactive dashboard for visualizing complex datasets. Uses D3.js and Chart.js with real-time updates and export functionality.</p>
-                            <p><em>Technologies: D3.js, Chart.js, Python, Flask</em></p>
+                    <aside class="about-sidebar">
+                        <img src="Photos/image011phy.jpg" alt="Alex Knight" class="avatar-box">
+                        <div class="counter">
+                            <div class="counter-title">Visitor Count Synthesizer</div>
+                            <div class="counter-formula"><code>f(n) = floor(max(0, tanh((n*47+1337)/89) + 0.25*(sin(n/47)+0.5*cos(n/9))) * 1e6)</code></div>
+                            <div class="counter-values">
+                                <span id="hit-raw" hidden></span>
+                                <div class="guess-row">
+                                    <label for="n-guess">n =</label>
+                                    <input id="n-guess" class="n-input" type="text" inputmode="numeric" autocomplete="off" />
+                                    <button id="n-guess-btn" class="n-btn">Check</button>
+                                </div>
+                                <div id="n-feedback" class="n-feedback"></div>
+                                <div>f(n) = <span id="hit-fx">0</span></div>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="project-item">
-                        <h3><a href="#" class="project-link" onclick="toggleProject(this); return false;">Mobile Fitness App</a></h3>
-                        <div class="project-details">
-                            <p>Cross-platform mobile app for tracking workouts and nutrition. Includes workout planning, progress tracking, and wearable device integration.</p>
-                            <p><em>Technologies: React Native, Firebase, Redux, HealthKit</em></p>
-                        </div>
-                    </div>
-
-                    <div class="project-item">
-                        <h3><a href="#" class="project-link" onclick="toggleProject(this); return false;">AI Chatbot</a></h3>
-                        <div class="project-details">
-                            <p>Conversational AI chatbot using natural language processing. Capable of understanding context and learning from interactions.</p>
-                            <p><em>Technologies: Python, TensorFlow, NLP, WebSocket</em></p>
-                        </div>
-                    </div>
+                    </aside>
                 </div>
             </section>
+
+            <!-- Projects Section removed per request -->
 
             <!-- Essays Section -->
             <section id="essays" class="content-section">
                 <h2>Essays</h2>
-                <p>In addition to projects I really enjoy writing. I usually write about whatever is on my mind. The essays are informal, and are not supposed to be polished at all.</p>
-                
+                <p>I really enjoy writing. I usually write about whatever is on my mind. The essays are informal, and are not supposed to be polished at all. If you want to chat more about any in particular, I'm happy to.</p>
+                <p>The essays here are shown chronologically starting in June 2025, and I'm hoping to add a bunch more soon.
+                <p>-------</p>
+                </p>
                 <div class="essay-list">
                     <div class="essay-item">
                         <h3><a href="#" class="essay-link" onclick="toggleEssay(this); return false;">What to Do if You're Young and in Trouble</a></h3>
@@ -94,58 +80,24 @@
                     </div>
 
                     <div class="essay-item">
-                        <h3><a href="#" class="essay-link" onclick="toggleEssay(this); return false;">Digital Minimalism in the Age of Distraction</a></h3>
+                        <h3><a href="#" class="essay-link" onclick="toggleEssay(this); return false;">Context Is All You Need </a></h3>
                         <div class="essay-details">
-                            <p>A personal reflection on finding balance in our hyperconnected world. Discusses strategies for mindful technology use.</p>
-                            <p><em>February 2024 | Lifestyle</em></p>
+                            <p>An interesting idea to improve context-awareness for models operating in large codebases.</p>
+                            <p><em>June 2025 | AI</em></p>
                             <div class="essay-content">
                                 <h4>Read Full Essay:</h4>
                                 <div class="essay-pdf">
-                                    <a href="#" class="pdf-link" onclick="return false;">
+                                    <a href="pdfs/context-is-all-you-need.pdf" class="pdf-link" target="_blank">
                                         <span class="pdf-icon">📄</span>
                                         <span class="pdf-text">PDF</span>
                                     </a>
-                                    <p class="pdf-note">PDF not yet uploaded</p>
+                                    <p class="pdf-note">PDF available (Click to open)</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="essay-item">
-                        <h3><a href="#" class="essay-link" onclick="toggleEssay(this); return false;">The Art of Learning</a></h3>
-                        <div class="essay-details">
-                            <p>Insights into effective learning strategies and the psychology of skill acquisition. How to optimize learning processes.</p>
-                            <p><em>January 2024 | Education</em></p>
-                            <div class="essay-content">
-                                <h4>Read Full Essay:</h4>
-                                <div class="essay-pdf">
-                                    <a href="#" class="pdf-link" onclick="return false;">
-                                        <span class="pdf-icon">📄</span>
-                                        <span class="pdf-text">PDF</span>
-                                    </a>
-                                    <p class="pdf-note">PDF not yet uploaded</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="essay-item">
-                        <h3><a href="#" class="essay-link" onclick="toggleEssay(this); return false;">Building Meaningful Connections</a></h3>
-                        <div class="essay-details">
-                            <p>A reflection on the importance of authentic relationships in our digital age. How technology affects human connection.</p>
-                            <p><em>December 2023 | Relationships</em></p>
-                            <div class="essay-content">
-                                <h4>Read Full Essay:</h4>
-                                <div class="essay-pdf">
-                                    <a href="#" class="pdf-link" onclick="return false;">
-                                        <span class="pdf-icon">📄</span>
-                                        <span class="pdf-text">PDF</span>
-                                    </a>
-                                    <p class="pdf-note">PDF not yet uploaded</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Removed placeholder essays per request -->
                 </div>
             </section>
 

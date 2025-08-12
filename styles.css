@@ -9,14 +9,16 @@ body {
     font-family: "Courier New", Courier, monospace;
     line-height: 1.6;
     color: #000;
-    background: #fff;
+    background: #f5f5f5; /* subtle off-white to evoke older sites */
     font-size: 14px;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1000px; /* widen to use more of the screen */
     margin: 0 auto;
-    padding: 20px;
+    padding: 24px;
+    background: #fff; /* classic centered content panel */
+    border: 1px solid #cfcfcf;
 }
 
 /* Header styles */
@@ -33,6 +35,77 @@ header h1 {
     text-transform: uppercase;
     letter-spacing: 1px;
 }
+
+.ticker {
+    margin-top: 8px;
+    border: 1px dashed #aaa;
+    background: #fafafa;
+    padding: 4px 6px;
+    font-size: 12px;
+}
+
+.ticker-egg { cursor: pointer; }
+
+/* Inline retro egg sequence */
+.egg-inline {
+    position: relative;
+    display: inline-block;
+    padding: 0 4px;
+    border: 1px dotted #999;
+    background: #fffbcc;
+    font-family: "Courier New", Courier, monospace;
+}
+
+.egg-shake { animation: eggshake 120ms steps(2, jump-none) 6; }
+@keyframes eggshake { 0%{ transform: translate(0,0) rotate(0deg);} 50%{ transform: translate(1px,-1px) rotate(-2deg);} 100%{ transform: translate(-1px,1px) rotate(2deg);} }
+
+.egg-boom {
+    color: #fff;
+    background: #b00;
+    border-color: #000;
+    text-shadow: 1px 1px 0 #000;
+}
+
+/* Pastel Easter egg shape */
+.egg-shape {
+    display: inline-block;
+    width: 22px;
+    height: 30px;
+    vertical-align: middle;
+    border-radius: 50% 50% 45% 45%;
+    border: 1px solid #888;
+    background: repeating-linear-gradient(
+        to bottom,
+        #fbeff8 0 6px,
+        #e6f7ff 6px 12px,
+        #e9ffe6 12px 18px,
+        #fff0e6 18px 24px,
+        #fbeff8 24px 30px
+    );
+    box-shadow: 0 0 0 1px #fff inset;
+}
+
+.egg-star {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10px;
+    color: #ff0;
+    animation: starpop 0.8s linear forwards;
+}
+
+@keyframes starpop { to { transform: translate(var(--tx), var(--ty)); opacity: 0; } }
+
+/* Particle for inline boom (re-using explode animation) */
+.particle {
+    position: absolute;
+    width: 6px; height: 6px;
+    background: #ffec8b;
+    border: 1px solid #a66;
+}
+
+@keyframes explode { to { transform: translate(var(--tx), var(--ty)) scale(0.8); opacity: 0; } }
 
 /* Navigation */
 .main-nav {
@@ -75,6 +148,107 @@ header h1 {
     margin-bottom: 15px;
     text-align: justify;
 }
+
+/* About layout with retro sidebar */
+.about-layout {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 24px;
+}
+
+.about-sidebar {
+    border: 1px solid #cfcfcf;
+    background: #f9f9f9;
+    padding: 12px;
+}
+
+.avatar-box {
+    width: 100%;
+    height: 300px; /* default as before */
+    border: 1px solid #000;
+    object-fit: cover;
+    display: block;
+    background: #eee;
+}
+
+/* removed badges for simplified sidebar */
+
+.counter {
+    margin-top: 12px;
+    font-size: 12px;
+}
+
+.counter-title {
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.counter-formula {
+    background: #fff;
+    border: 1px dashed #aaa;
+    padding: 6px;
+    margin-bottom: 8px;
+    overflow-wrap: anywhere;
+}
+
+.counter-values {
+    font-family: "Courier New", Courier, monospace;
+    background: #fff;
+    border: 1px solid #cfcfcf;
+    padding: 6px;
+}
+
+.guess-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+    justify-content: flex-start;
+    padding-left: 6px;
+}
+
+.n-input {
+    width: 105px; /* slightly narrower to keep inline with label */
+    padding: 2px 4px;
+    border: 1px solid #999;
+    background: #f6f6f6;
+    font-family: inherit;
+}
+
+.n-btn {
+    padding: 2px 12px;
+    border: 1px solid #666;
+    background: #e6e6e6;
+    cursor: pointer;
+}
+
+.n-btn:hover { background: #dcdcdc; }
+
+.n-feedback { margin-bottom: 6px; }
+
+/* Copy toast */
+.copy-toast {
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #222;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 6px 10px;
+    font-size: 12px;
+    z-index: 2000;
+    display: none;
+}
+.copy-toast.show { display: block; }
+
+/* removed blink effect */
+
+.small-note {
+    font-size: 12px;
+}
+
+/* blink animation removed */
 
 /* Project list */
 .project-list {
@@ -189,27 +363,24 @@ header h1 {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 12px 20px;
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-    color: white;
+    padding: 8px 14px;
+    background: #e6e6e6; /* flatter, utilitarian look */
+    color: #000;
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 2px;
     font-weight: 500;
-    transition: all 0.3s ease;
-    border: 1px solid #34495e;
+    border: 1px solid #666;
     width: fit-content;
 }
 
 .pdf-link:hover {
-    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(52, 73, 94, 0.3);
+    background: #d9d9d9;
     text-decoration: none;
-    color: white;
+    color: #000;
 }
 
 .pdf-link:active {
-    transform: translateY(0);
+    background: #d0d0d0;
 }
 
 .pdf-icon {
@@ -254,6 +425,15 @@ header h1 {
     display: block;
 }
 
+/* RSA Easter egg image slot */
+#rsa-left-slot {
+    width: 100%;
+    min-height: 240px; /* base; JS will size to fill available space */
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 /* Footer */
 footer {
     margin-top: 60px;
@@ -289,6 +469,22 @@ footer {
         margin-left: 10px;
         padding-left: 15px;
     }
+
+    /* Stack About layout on mobile */
+    .about-layout {
+        display: block; /* simpler flow to avoid odd grid sizing */
+    }
+    .about-sidebar { margin-top: 16px; }
+    .avatar-box { height: 220px; }
+    .main-nav {
+        line-height: 1.8;
+    }
+    .nav-link { display: inline-block; padding: 4px 6px; }
+
+    /* Improve readability on narrow screens */
+    .content-section p { text-align: left; }
+    .counter-formula code { font-size: 12px; display: block; }
+    .counter-values { font-size: 12px; }
 }
 
 @media (max-width: 480px) {
@@ -313,4 +509,7 @@ footer {
     .food-item h3 {
         font-size: 13px;
     }
+
+    .avatar-box { height: 190px; }
+    .n-input { width: 100px; }
 } 
