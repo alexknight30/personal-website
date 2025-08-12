@@ -13,7 +13,8 @@
             <nav class="main-nav">
                 <a href="#about" class="nav-link active">About</a> |
                 <a href="#essays" class="nav-link">Essays</a> |
-                <a href="#food" class="nav-link">Food</a>
+                <a href="#food" class="nav-link">Food</a> |
+                <a href="#cookie" id="cookie-link" class="nav-link" style="display:none">Cookie Land</a>
             </nav>
             <div class="ticker"><marquee behavior="scroll" direction="left" scrollamount="3"><span id="yay-html" class="ticker-egg">Yay HTML!</span></marquee></div>
         </header>
@@ -46,6 +47,7 @@
                                 <div id="n-feedback" class="n-feedback"></div>
                                 <div>f(n) = <span id="hit-fx">0</span></div>
                             </div>
+
                         </div>
                     </aside>
                 </div>
@@ -105,6 +107,16 @@
             <section id="food" class="content-section">
                 <h2>Food</h2>
                 <p>I love to cook. Here is some stuff I've made.</p>
+                <form id="food-ideas" class="idea-form">
+                    <label for="idea-input">Ideas on what to make next?</label>
+                    <div class="idea-row">
+                        <input id="idea-input" class="idea-input" type="text" placeholder="Type your idea…" maxlength="120" />
+                        <button class="idea-btn" type="submit">Send</button>
+                    </div>
+                    <div id="idea-confirm" class="idea-confirm"></div>
+                    <div id="idea-hints" class="idea-hints"></div>
+                </form>
+                <img id="cookie-yes" class="cookie-yes" src="Photos/cookieyes.jpg" alt="Cookie approved" style="display:none;" />
                 
                 <div class="food-list">
                     <div class="food-item">
@@ -162,6 +174,56 @@
                         <h3>Lamb, beets and burrata, potato, and hummus</h3>
                     </div>
                     
+                </div>
+            </section>
+
+            <!-- Cookie Land (hidden unless unlocked) -->
+            <section id="cookie" class="content-section">
+                <h2>COOKIE LAND</h2>
+                <div id="cookie-recipe" class="recipe-box">
+                <h3>Cookie Monster's Favorite Chocolate Chip Recipe</h3>
+                <h4>Wet Ingredients</h4>
+                <ul>
+                    <li>Unsalted butter – 240g (16% water)</li>
+                    <li>Granulated sugar – 190g (0% water)</li>
+                    <li>Brown sugar — 170g (2% water)</li>
+                    <li>Eggs – 2 × 52 g = 104g (74% water)</li>
+                    <li>Pure vanilla extract – 12g (35% water)</li>
+                </ul>
+                <h4>Dry Ingredients</h4>
+                <ul>
+                    <li>All-purpose flour – 300g</li>
+                    <li>Baking soda – 5g</li>
+                    <li>Fine sea salt – 4g</li>
+                    <li>Chocolate chips – 360g</li>
+                    <li>Mystery aromatic ingredient – 14g</li>
+                </ul>
+                <h4>Directions</h4>
+                <ol>
+                    <li>Cream the butter with both sugars until light and fluffy</li>
+                    <li>Beat in eggs and vanilla until smooth</li>
+                    <li>In a separate bowl, whisk together flour, baking soda, salt, and mystery ingredient</li>
+                    <li>Fold dry into wet, then stir in chocolate chips</li>
+                    <li>Scoop dough onto trays, noting that 3 of every 5 cookies are smaller (90% of average weight) and 2 of every 5 are larger (115% of average). The average cookie weighs 26.66g!</li>
+                    <li>Bake at 175 °C (347–350 °F), center rack. On dark pans reduce temp by 5 °C; on convection, reduce by 10–12 °C and check 2 min earlier</li>
+                    <li>Cool on sheet 2 minutes, then rack</li>
+                </ol>
+                <h4>Bakers Notes</h4>
+                <p>Hmmmm cookie. Not so fast! The oven is running a little hot, so all of the water content is lost to the heat. After this, the Maillard reaction claims another 1.8% of that total. Lastly, Cookie Monster gets confused easily, so it's best to keep everything in the same units! How many cookies will Cookie Monster have????</p>
+                <p><em>Hint: Cookie Monster may or may not have added unnecessary information to his recipe...</em></p>
+
+                <form id="cookie-count-form" class="idea-form">
+                    <label for="cookie-count">How many cookies?</label>
+                    <div class="idea-row">
+                        <input id="cookie-count" class="idea-input" type="number" min="1" placeholder="e.g., 24" />
+                        <button class="idea-btn" type="submit">Submit</button>
+                    </div>
+                    <div id="cookie-count-result" class="idea-confirm"></div>
+                </form>
+                </div>
+                <div id="cookie-completion" style="display:none;">
+                    <img id="cookie-placeholder" src="Photos/cookieyes.jpg" alt="Cookie placeholder" style="max-width:300px; border:1px solid #000;" />
+                    <p id="cookie-completion-msg" style="margin-top: 12px; font-style: italic; color: #666;">You finished...more coming soon...</p>
                 </div>
             </section>
         </main>

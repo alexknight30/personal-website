@@ -403,6 +403,43 @@ header h1 {
     margin-top: 20px;
 }
 
+.idea-form { margin: 10px 0 20px 0; }
+.idea-form label { display: block; margin-bottom: 6px; }
+.idea-row { display: flex; gap: 8px; align-items: center; }
+.idea-input {
+    flex: 0 1 300px; /* smaller */
+    min-width: 200px;
+    padding: 4px 6px;
+    border: 1px solid #999;
+    background: #f6f6f6;
+    font-family: inherit;
+}
+.idea-btn { padding: 4px 10px; border: 1px solid #666; background: #e6e6e6; cursor: pointer; }
+.idea-btn:hover { background: #dcdcdc; }
+.idea-confirm { margin-top: 6px; font-size: 12px; color: #0a0; }
+.idea-hints { margin-top: 8px; }
+.idea-hints p { margin: 0 0 6px 0; font-weight: bold; }
+.idea-hints math { display: block; margin-bottom: 6px; }
+
+/* Cookie Land layout */
+.recipe-box {
+    max-width: 720px;
+    padding: 12px 16px;
+    border: 1px solid #cfcfcf;
+    background: #fafafa;
+    overflow-wrap: anywhere;
+    margin-bottom: 16px;
+}
+.recipe-box ul,
+.recipe-box ol {
+    margin-left: 16px;   /* keep inside the gray box */
+    padding-left: 24px;  /* indent bullets/numbers a touch */
+    list-style-position: inside; /* ensure bullets/nums stay inside */
+}
+.recipe-box li { margin-left: 0; }
+
+.cookie-yes { margin-top: 10px; max-width: 260px; border: 1px solid #000; display: block; }
+
 .food-item {
     margin-bottom: 25px;
 }
