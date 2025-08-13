@@ -510,6 +510,10 @@ document.addEventListener('click', function(e) {
         if (rsaDone && /^(cookie|cookies|cookie!)$/i.test(value)) {
             if (cookieImg) {
                 cookieImg.style.display = 'block';
+                const clickMeText = document.getElementById('click-me-text');
+                if (clickMeText) {
+                    clickMeText.style.display = 'block';
+                }
                 cookieImg.addEventListener('click', function() {
                     if (cookieLink) {
                         cookieLink.style.display = 'inline';
@@ -550,9 +554,22 @@ document.addEventListener('click', function(e) {
     const completion = document.getElementById('cookie-completion');
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        const n = parseInt((input.value || '').trim(), 10);
+        const rawValue = (input.value || '').trim();
+        
+        // Check for RSA-2048 first
+        if (rawValue === 'RSA-2048') {
+            // Show poem modal
+            const modal = document.getElementById('poem-modal');
+            if (modal) {
+                modal.style.display = 'flex';
+            }
+            out.textContent = '';
+            return;
+        }
+        
+        const n = parseInt(rawValue, 10);
         if (!Number.isFinite(n)) {
-            out.textContent = 'Enter a valid number of cookies.'; out.style.color = '#a00';
+            out.textContent = 'Math is hard! Try again.'; out.style.color = '#a00';
             return;
         }
         if (n === 47) {
@@ -567,4 +584,319 @@ document.addEventListener('click', function(e) {
             out.textContent = 'Math is hard! Try again.'; out.style.color = '#a00';
         }
     });
+})();
+
+// Modal close functionality
+(function() {
+    const modal = document.getElementById('poem-modal');
+    const closeBtn = document.getElementById('close-modal');
+    
+    if (closeBtn && modal) {
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+    }
+    
+    // Close modal when clicking outside
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    }
+})();
+
+// Neural Network Game
+(function() {
+    const nextBtn = document.getElementById('neural-game-next');
+    const backBtn = document.getElementById('back-to-instructions');
+    const instructionsDiv = document.getElementById('neural-instructions');
+    const gameDiv = document.getElementById('neural-game');
+    const canvas = document.getElementById('network-output');
+    const svg = document.getElementById('network-svg');
+    const feedback = document.getElementById('network-feedback');
+    
+    // Game state - load from localStorage if available
+    let network = JSON.parse(localStorage.getItem('neuralNetworkProgress') || '[0, 0, 0, 0]');
+    let kermitImage = null;
+    
+    // Single next button - always visible
+    
+    // Load Kermit image
+    const img = new Image();
+    img.onload = function() { kermitImage = img; };
+    img.src = 'Photos/kermit.jpg';
+    
+    // Single next button handler
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+            showGame();
+        });
+    }
+    
+    if (backBtn) {
+        backBtn.addEventListener('click', function() {
+            // Save progress before going back
+            saveProgress();
+            showInstructions();
+        });
+    }
+    
+    function showGame() {
+        instructionsDiv.style.display = 'none';
+        gameDiv.style.display = 'block';
+        updateNetwork();
+    }
+    
+    function showInstructions() {
+        instructionsDiv.style.display = 'block';
+        gameDiv.style.display = 'none';
+    }
+    
+    function saveProgress() {
+        localStorage.setItem('neuralNetworkProgress', JSON.stringify(network));
+    }
+    
+    // Add neuron button handlers
+    document.querySelectorAll('.add-neuron-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const layer = parseInt(this.dataset.layer);
+            if (network[layer] < 4) {
+                network[layer]++;
+                saveProgress();
+                updateNetwork();
+            }
+        });
+    });
+    
+    // Remove neuron button handlers
+    document.querySelectorAll('.remove-neuron-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const layer = parseInt(this.dataset.layer);
+            if (network[layer] > 0) {
+                network[layer]--;
+                // If this makes a layer empty, also clear all subsequent layers to maintain no-gaps rule
+                for (let i = layer + 1; i < network.length; i++) {
+                    if (network[layer] === 0) {
+                        network[i] = 0;
+                    }
+                }
+                saveProgress();
+                updateNetwork();
+            }
+        });
+    });
+    
+    function updateNetwork() {
+        updateButtonVisibility();
+        drawNetwork();
+        updateStats();
+        updateOutput();
+        updateFeedback();
+    }
+    
+    function updateButtonVisibility() {
+        // Update add buttons
+        const addButtons = document.querySelectorAll('.add-neuron-btn');
+        addButtons.forEach((btn, i) => {
+            const layer = parseInt(btn.dataset.layer);
+            // Show button if previous layer has neurons (or if it's layer 0)
+            const canShow = layer === 0 || network[layer - 1] > 0;
+            // Disable if at max capacity
+            const isMaxed = network[layer] >= 4;
+            
+            btn.style.display = canShow ? 'block' : 'none';
+            btn.disabled = isMaxed;
+            btn.textContent = isMaxed ? '✓' : '+';
+        });
+        
+        // Update remove buttons
+        const removeButtons = document.querySelectorAll('.remove-neuron-btn');
+        removeButtons.forEach((btn, i) => {
+            const layer = parseInt(btn.dataset.layer);
+            // Show button if this layer has neurons
+            const hasNeurons = network[layer] > 0;
+            
+            btn.style.display = hasNeurons ? 'block' : 'none';
+            btn.disabled = !hasNeurons;
+        });
+    }
+    
+    function drawNetwork() {
+        if (!svg) return;
+        
+        // Clear previous content
+        svg.innerHTML = '';
+        
+        const layerWidth = 60;
+        const layerHeight = 160;
+        const neuronSize = 16;
+        const startX = 20;
+        const startY = 20;
+        
+        // Draw connections first (behind neurons)
+        for (let layer = 0; layer < 3; layer++) {
+            if (network[layer] > 0 && network[layer + 1] > 0) {
+                const x1 = startX + layer * layerWidth + neuronSize/2;
+                const x2 = startX + (layer + 1) * layerWidth + neuronSize/2;
+                const spacing = 40;
+                
+                for (let n1 = 0; n1 < network[layer]; n1++) {
+                    for (let n2 = 0; n2 < network[layer + 1]; n2++) {
+                        const y1 = startY + (n1 * spacing);
+                        const y2 = startY + (n2 * spacing);
+                        
+                        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                        line.setAttribute('x1', x1);
+                        line.setAttribute('y1', y1);
+                        line.setAttribute('x2', x2);
+                        line.setAttribute('y2', y2);
+                        line.setAttribute('stroke', '#666');
+                        line.setAttribute('stroke-width', '1');
+                        line.setAttribute('opacity', '0.3');
+                        svg.appendChild(line);
+                    }
+                }
+            }
+        }
+        
+        // Draw neurons (cookies) - sequential top to bottom
+        for (let layer = 0; layer < 4; layer++) {
+            const x = startX + layer * layerWidth;
+            
+            for (let neuron = 0; neuron < network[layer]; neuron++) {
+                // Fixed spacing - sequential top to bottom
+                const spacing = 40; // Fixed spacing between neurons
+                const y = startY + (neuron * spacing);
+                
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', x);
+                circle.setAttribute('cy', y);
+                circle.setAttribute('r', neuronSize/2);
+                circle.setAttribute('fill', '#ffa500');
+                circle.setAttribute('stroke', '#ff8c00');
+                circle.setAttribute('stroke-width', '2');
+                svg.appendChild(circle);
+                
+                // Add cookie emoji
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', x);
+                text.setAttribute('y', y + 2);
+                text.setAttribute('text-anchor', 'middle');
+                text.setAttribute('font-size', '12');
+                text.textContent = '🍪';
+                svg.appendChild(text);
+            }
+        }
+    }
+    
+    function updateStats() {
+        const layers = network.filter(n => n > 0).length;
+        const totalNeurons = network.reduce((sum, n) => sum + n, 0);
+        
+        document.getElementById('layer-count').textContent = layers;
+        document.getElementById('neuron-count').textContent = totalNeurons;
+    }
+    
+    function updateOutput() {
+        if (!canvas || !kermitImage) return;
+        
+        const ctx = canvas.getContext('2d');
+        const layers = network.filter(n => n > 0).length;
+        const totalNeurons = network.reduce((sum, n) => sum + n, 0);
+        
+        // Calculate accuracy and effects based on network configuration
+        let accuracy = 0;
+        let blur = 10;
+        let pixelation = 8;
+        let brightness = 0.3;
+        
+        // More layers = better feature hierarchy (less blur)
+        if (layers >= 2) blur = Math.max(2, 10 - layers * 2);
+        if (layers >= 3) brightness = Math.min(1, 0.3 + layers * 0.2);
+        
+        // More neurons = better resolution (less pixelation)
+        if (totalNeurons >= 4) pixelation = Math.max(2, 8 - totalNeurons * 0.5);
+        
+        // Calculate accuracy - ONLY 100% for the optimal configuration
+        const optimalLayers = 4;
+        const optimalNeurons = 11;
+        
+        if (layers === optimalLayers && totalNeurons === optimalNeurons) {
+            // Perfect configuration: 4 layers, 11 total neurons
+            accuracy = 100;
+        } else if (layers >= 2 && totalNeurons >= 6) {
+            // Good configurations get high but not perfect accuracy
+            let baseAccuracy = (layers * 15) + (totalNeurons * 4);
+            
+            // Penalize being too far from optimal
+            const layerPenalty = Math.abs(layers - optimalLayers) * 10;
+            const neuronPenalty = Math.abs(totalNeurons - optimalNeurons) * 3;
+            
+            accuracy = Math.max(10, Math.min(95, baseAccuracy - layerPenalty - neuronPenalty));
+            
+            // Extra penalty for overfitting (too many neurons)
+            if (totalNeurons > 12) {
+                accuracy = Math.max(60, accuracy - 20);
+            }
+        } else {
+            // Poor configurations
+            accuracy = Math.max(5, (layers * 8) + (totalNeurons * 2));
+        }
+        
+        // Draw processed image
+        ctx.clearRect(0, 0, 150, 150);
+        
+        // Apply effects to simulate network processing
+        ctx.filter = `blur(${blur}px) brightness(${brightness})`;
+        
+        // Draw pixelated version first
+        const tempCanvas = document.createElement('canvas');
+        const tempCtx = tempCanvas.getContext('2d');
+        tempCanvas.width = Math.max(2, 150 / pixelation);
+        tempCanvas.height = Math.max(2, 150 / pixelation);
+        
+        tempCtx.drawImage(kermitImage, 0, 0, tempCanvas.width, tempCanvas.height);
+        
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(tempCanvas, 0, 0, 150, 150);
+        
+        document.getElementById('accuracy').textContent = Math.round(accuracy) + '%';
+    }
+    
+    function updateFeedback() {
+        if (!feedback) return;
+        
+        const layers = network.filter(n => n > 0).length;
+        const totalNeurons = network.reduce((sum, n) => sum + n, 0);
+        const optimalLayers = 4;
+        const optimalNeurons = 11;
+        
+        feedback.className = '';
+        
+        if (totalNeurons === 0) {
+            feedback.innerHTML = '<p><em>Add neurons to start building your network...</em></p>';
+        } else if (layers === optimalLayers && totalNeurons === optimalNeurons) {
+            feedback.className = 'success';
+            feedback.innerHTML = '<p><strong>Perfect Configuration!</strong> 🎯 You found the optimal architecture: 4 layers for deep feature hierarchy and 11 neurons for the right capacity. This achieves 100% accuracy!</p>';
+        } else if (layers === 1) {
+            feedback.className = 'warning';
+            feedback.innerHTML = '<p><strong>Single Layer:</strong> Your network can only capture basic patterns. You need 4 layers to detect complex features like Kermit\'s eyes and mouth!</p>';
+        } else if (layers === 2) {
+            feedback.innerHTML = '<p><strong>Two Layers:</strong> Better! But you need more layers for optimal feature hierarchy. Try adding more layers.</p>';
+        } else if (layers === 3) {
+            feedback.innerHTML = '<p><strong>Three Layers:</strong> Good depth! But you need one more layer for optimal feature hierarchy. Try adding a fourth layer.</p>';
+        } else if (layers > 4) {
+            feedback.className = 'warning';
+            feedback.innerHTML = '<p><strong>Too Deep:</strong> More than 4 layers is unnecessary for this image recognition task. Try reducing to 4 layers.</p>';
+        } else if (totalNeurons < 6) {
+            feedback.innerHTML = '<p><strong>Too Few Neurons:</strong> Your network lacks capacity. Add more neurons for better resolution.</p>';
+        } else if (totalNeurons > 15) {
+            feedback.className = 'error';
+            feedback.innerHTML = '<p><strong>Overfitting Warning!</strong> Too many neurons! Your network might memorize Kermit but fail on other images. Try around 11 total neurons.</p>';
+        } else {
+            feedback.innerHTML = '<p><strong>Close!</strong> You have good depth and reasonable capacity. Try 4 layers with 11 total neurons for the perfect balance.</p>';
+        }
+    }
 })();

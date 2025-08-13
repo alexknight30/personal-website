@@ -116,7 +116,10 @@
                     <div id="idea-confirm" class="idea-confirm"></div>
                     <div id="idea-hints" class="idea-hints"></div>
                 </form>
-                <img id="cookie-yes" class="cookie-yes" src="Photos/cookieyes.jpg" alt="Cookie approved" style="display:none;" />
+                <div style="display: inline-block;">
+                    <img id="cookie-yes" class="cookie-yes" src="Photos/cookieyes.jpg" alt="Cookie approved" style="display:none;" />
+                    <p id="click-me-text" style="display: none; text-align: left; font-size: 12px; color: #666; margin-top: 5px;">Click me</p>
+                </div>
                 
                 <div class="food-list">
                     <div class="food-item">
@@ -215,15 +218,100 @@
                 <form id="cookie-count-form" class="idea-form">
                     <label for="cookie-count">How many cookies?</label>
                     <div class="idea-row">
-                        <input id="cookie-count" class="idea-input" type="number" min="1" placeholder="e.g., 24" />
+                        <input id="cookie-count" class="idea-input" type="text" placeholder="e.g., 24 or RSA-2048" />
                         <button class="idea-btn" type="submit">Submit</button>
                     </div>
                     <div id="cookie-count-result" class="idea-confirm"></div>
                 </form>
                 </div>
                 <div id="cookie-completion" style="display:none;">
-                    <img id="cookie-placeholder" src="Photos/cookieyes.jpg" alt="Cookie placeholder" style="max-width:300px; border:1px solid #000;" />
-                    <p id="cookie-completion-msg" style="margin-top: 12px; font-style: italic; color: #666;">You finished...more coming soon...</p>
+                    <div id="neural-instructions">
+                        <h3>🧠 Neural Network Builder Challenge</h3>
+                        <p><strong>Mission:</strong> Build a neural network to correctly identify this image of Kermit the Frog!</p>
+                        
+                        <div style="border: 1px solid #666; padding: 12px; margin: 10px 0; background: #f9f9f9;">
+                            <h4>How it works:</h4>
+                            <ul style="margin: 8px 0; padding-left: 20px;">
+                                <li><strong>Layers</strong> (columns): Determine feature complexity. More layers = better at recognizing complex shapes like eyes and mouth.</li>
+                                <li><strong>Neurons</strong> (cookies per column): Control resolution and detail. More neurons = sharper, more detailed recognition.</li>
+                                <li><strong>Rule:</strong> You can only add neurons to the next column if the previous column has neurons (no gaps!).</li>
+                            </ul>
+                        </div>
+                        
+                        <p><strong>Goal:</strong> Find the optimal network configuration - too few neurons and the image will be blurry, too many and you'll overfit!</p>
+                        
+                        <button id="neural-game-next" class="idea-btn">
+                            →
+                        </button>
+                    </div>
+                    
+                    <div id="neural-game" style="display: none;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <h3 style="margin: 0;">Neural Network Builder</h3>
+                            <button id="back-to-instructions" class="idea-btn" style="font-size: 12px;">
+                                ← Back to Instructions
+                            </button>
+                        </div>
+                        
+                        <!-- Target and Current Images -->
+                        <div style="display: flex; gap: 20px; margin: 15px 0; align-items: center;">
+                            <div>
+                                <h4>Target:</h4>
+                                <img src="Photos/kermit.jpg" alt="Target Kermit" style="width: 150px; height: 150px; border: 2px solid #000; object-fit: cover;" />
+                            </div>
+                            <div>
+                                <h4>Your Network Output:</h4>
+                                <canvas id="network-output" width="150" height="150" style="border: 2px solid #000; background: #f0f0f0;"></canvas>
+                            </div>
+                        </div>
+                        
+                        <!-- Network Grid -->
+                        <div id="neural-grid" style="margin: 20px 0;">
+                            <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 10px;">
+                                <div style="width: 60px; text-align: center; font-size: 12px;">Input Layer</div>
+                                <div style="width: 60px; text-align: center; font-size: 12px;">Hidden 1</div>
+                                <div style="width: 60px; text-align: center; font-size: 12px;">Hidden 2</div>
+                                <div style="width: 60px; text-align: center; font-size: 12px;">Output</div>
+                            </div>
+                            
+                            <!-- Control buttons row -->
+                            <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 5px;">
+                                <div style="display: flex; flex-direction: column; gap: 2px;">
+                                    <button class="add-neuron-btn" data-layer="0" style="width: 30px; height: 20px; border: 1px solid #666; background: #e6e6e6; cursor: pointer; font-size: 12px;">+</button>
+                                    <button class="remove-neuron-btn" data-layer="0" style="width: 30px; height: 20px; border: 1px solid #666; background: #ffcccc; cursor: pointer; font-size: 12px; display: none;">-</button>
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 2px;">
+                                    <button class="add-neuron-btn" data-layer="1" style="width: 30px; height: 20px; border: 1px solid #666; background: #e6e6e6; cursor: pointer; font-size: 12px; display: none;">+</button>
+                                    <button class="remove-neuron-btn" data-layer="1" style="width: 30px; height: 20px; border: 1px solid #666; background: #ffcccc; cursor: pointer; font-size: 12px; display: none;">-</button>
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 2px;">
+                                    <button class="add-neuron-btn" data-layer="2" style="width: 30px; height: 20px; border: 1px solid #666; background: #e6e6e6; cursor: pointer; font-size: 12px; display: none;">+</button>
+                                    <button class="remove-neuron-btn" data-layer="2" style="width: 30px; height: 20px; border: 1px solid #666; background: #ffcccc; cursor: pointer; font-size: 12px; display: none;">-</button>
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 2px;">
+                                    <button class="add-neuron-btn" data-layer="3" style="width: 30px; height: 20px; border: 1px solid #666; background: #e6e6e6; cursor: pointer; font-size: 12px; display: none;">+</button>
+                                    <button class="remove-neuron-btn" data-layer="3" style="width: 30px; height: 20px; border: 1px solid #666; background: #ffcccc; cursor: pointer; font-size: 12px; display: none;">-</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Network visualization -->
+                            <svg id="network-svg" width="300" height="200" style="border: 1px solid #ccc; background: #fafafa;">
+                                <!-- Connections will be drawn here -->
+                            </svg>
+                        </div>
+                        
+                        <!-- Feedback -->
+                        <div id="network-feedback" style="margin: 15px 0; padding: 10px; border: 1px solid #ccc; background: #f9f9f9; min-height: 40px;">
+                            <p><em>Add neurons to start building your network...</em></p>
+                        </div>
+                        
+                        <!-- Network Status -->
+                        <div style="display: flex; gap: 20px; font-size: 12px;">
+                            <div>Layers: <span id="layer-count">0</span></div>
+                            <div>Total Neurons: <span id="neuron-count">0</span></div>
+                            <div>Accuracy: <span id="accuracy">0%</span></div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
@@ -231,6 +319,61 @@
         <footer>
             <p>© 2025</p>
         </footer>
+    </div>
+
+    <div class="copy-toast" id="copy-toast">Copied to clipboard!</div>
+    
+    <!-- Popup modal for Mary Oliver poem -->
+    <div id="poem-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" id="close-modal">&times;</span>
+            <h3>Not the number, but here's a little treat for your efforts.</h3>
+                            <div class="poem-content">
+                    <h4>When Death Comes</h4>
+                    <div class="poem-text">
+                    <p>When death comes<br>
+                    like the hungry bear in autumn;<br>
+                    when death comes and takes all the bright coins from his purse</p>
+                    
+                    <p>to buy me, and snaps the purse shut;<br>
+                    when death comes<br>
+                    like the measle-pox;</p>
+                    
+                    <p>when death comes<br>
+                    like an iceberg between the shoulder blades,</p>
+                    
+                    <p>I want to step through the door full of curiosity, wondering:<br>
+                    what is it going to be like, that cottage of darkness?</p>
+                    
+                    <p>And therefore I look upon everything<br>
+                    as a brotherhood and a sisterhood,<br>
+                    and I look upon time as no more than an idea,<br>
+                    and I consider eternity as another possibility,</p>
+                    
+                    <p>and I think of each life as a flower, as common<br>
+                    as a field daisy, and as singular,</p>
+                    
+                    <p>and each name a comfortable music in the mouth,<br>
+                    tending, as all music does, toward silence,</p>
+                    
+                    <p>and each body a lion of courage, and something<br>
+                    precious to the earth.</p>
+                    
+                    <p>When it's over, I want to say: all my life<br>
+                    I was a bride married to amazement.<br>
+                    I was the bridegroom, taking the world into my arms.</p>
+                    
+                    <p>When it's over, I don't want to wonder<br>
+                    if I have made of my life something particular, and real.<br>
+                    I don't want to find myself sighing and frightened,<br>
+                    or full of argument.</p>
+                    
+                    <p>I don't want to end up simply having visited this world.</p>
+                    
+                    <p style="text-align: right; margin-top: 20px;"><em>—Mary Oliver</em></p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
