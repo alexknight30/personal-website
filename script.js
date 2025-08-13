@@ -806,22 +806,47 @@ document.addEventListener('click', function(e) {
         const layers = network.filter(n => n > 0).length;
         const totalNeurons = network.reduce((sum, n) => sum + n, 0);
         
+        // Always clear and draw something
+        ctx.clearRect(0, 0, 150, 150);
+        
+        // If no neurons, show a very poor version
+        if (totalNeurons === 0) {
+            ctx.filter = 'blur(20px) brightness(0.1)';
+            ctx.imageSmoothingEnabled = false;
+            const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCanvas.width = 5;
+            tempCanvas.height = 5;
+            tempCtx.drawImage(kermitImage, 0, 0, 5, 5);
+            ctx.drawImage(tempCanvas, 0, 0, 150, 150);
+            document.getElementById('accuracy').textContent = '0%';
+            return;
+        }
+        
         // Calculate accuracy and effects based on network configuration
-        let accuracy = 0;
-        let blur = 10;
-        let pixelation = 8;
-        let brightness = 0.3;
-        
-        // More layers = better feature hierarchy (less blur)
-        if (layers >= 2) blur = Math.max(2, 10 - layers * 2);
-        if (layers >= 3) brightness = Math.min(1, 0.3 + layers * 0.2);
-        
-        // More neurons = better resolution (less pixelation)
-        if (totalNeurons >= 4) pixelation = Math.max(2, 8 - totalNeurons * 0.5);
-        
-        // Calculate accuracy - ONLY 100% for the optimal configuration
         const optimalLayers = 4;
         const optimalNeurons = 11;
+        
+        let accuracy = 0;
+        let blur = 15;
+        let pixelation = 12;
+        let brightness = 0.2;
+        
+        // Perfect configuration should produce near-identical image
+        if (layers === optimalLayers && totalNeurons === optimalNeurons) {
+            blur = 0;
+            pixelation = 1;
+            brightness = 1;
+        } else {
+            // More layers = better feature hierarchy (less blur)
+            blur = Math.max(0.5, 15 - (layers * 3.5));
+            
+            // More neurons = better resolution (less pixelation)  
+            pixelation = Math.max(1, 12 - (totalNeurons * 0.8));
+            
+            // Both layers and neurons contribute to brightness
+            brightness = Math.min(1, 0.2 + (layers * 0.15) + (totalNeurons * 0.04));
+        }
         
         if (layers === optimalLayers && totalNeurons === optimalNeurons) {
             // Perfect configuration: 4 layers, 11 total neurons
@@ -845,22 +870,27 @@ document.addEventListener('click', function(e) {
             accuracy = Math.max(5, (layers * 8) + (totalNeurons * 2));
         }
         
-        // Draw processed image
-        ctx.clearRect(0, 0, 150, 150);
-        
-        // Apply effects to simulate network processing
-        ctx.filter = `blur(${blur}px) brightness(${brightness})`;
-        
-        // Draw pixelated version first
-        const tempCanvas = document.createElement('canvas');
-        const tempCtx = tempCanvas.getContext('2d');
-        tempCanvas.width = Math.max(2, 150 / pixelation);
-        tempCanvas.height = Math.max(2, 150 / pixelation);
-        
-        tempCtx.drawImage(kermitImage, 0, 0, tempCanvas.width, tempCanvas.height);
-        
-        ctx.imageSmoothingEnabled = false;
-        ctx.drawImage(tempCanvas, 0, 0, 150, 150);
+        // Draw processed image (already cleared above)
+        if (layers === optimalLayers && totalNeurons === optimalNeurons) {
+            // Perfect configuration: render nearly identical to target
+            ctx.filter = 'none';
+            ctx.imageSmoothingEnabled = true;
+            ctx.drawImage(kermitImage, 0, 0, 150, 150);
+        } else {
+            // Apply effects to simulate network processing
+            ctx.filter = `blur(${blur}px) brightness(${brightness})`;
+            
+            // Draw pixelated version first for non-perfect configurations
+            const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCanvas.width = Math.max(2, 150 / pixelation);
+            tempCanvas.height = Math.max(2, 150 / pixelation);
+            
+            tempCtx.drawImage(kermitImage, 0, 0, tempCanvas.width, tempCanvas.height);
+            
+            ctx.imageSmoothingEnabled = false;
+            ctx.drawImage(tempCanvas, 0, 0, 150, 150);
+        }
         
         document.getElementById('accuracy').textContent = Math.round(accuracy) + '%';
     }
