@@ -909,24 +909,34 @@ document.addEventListener('click', function(e) {
             feedback.innerHTML = '<p><em>Add neurons to start building your network...</em></p>';
         } else if (layers === optimalLayers && totalNeurons === optimalNeurons) {
             feedback.className = 'success';
-            feedback.innerHTML = '<p><strong>Perfect Configuration!</strong> 🎯 You found the optimal architecture: 4 layers for deep feature hierarchy and 11 neurons for the right capacity. This achieves 100% accuracy!</p>';
+            feedback.innerHTML = '<p><strong>Perfect Configuration!</strong> You found the optimal architecture! This achieves 100% accuracy!</p><button id="continue-button" class="idea-btn" style="margin-top: 10px;">Continue</button>';
+            
+            // Add click handler for continue button
+            setTimeout(() => {
+                const continueBtn = document.getElementById('continue-button');
+                if (continueBtn) {
+                    continueBtn.addEventListener('click', function() {
+                        feedback.innerHTML = '<div style="text-align: center; padding: 20px; border: 2px solid #4CAF50; border-radius: 8px; background: #f9f9f9;"><p><strong>This is a work in progress.</strong></p><p>More puzzles to follow soon...</p></div>';
+                    });
+                }
+            }, 100);
         } else if (layers === 1) {
             feedback.className = 'warning';
-            feedback.innerHTML = '<p><strong>Single Layer:</strong> Your network can only capture basic patterns. You need 4 layers to detect complex features like Kermit\'s eyes and mouth!</p>';
+            feedback.innerHTML = '<p><strong>Single Layer:</strong> Your network can only capture basic patterns. You need multiple layers to detect complex features like Kermit\'s eyes and mouth!</p>';
         } else if (layers === 2) {
             feedback.innerHTML = '<p><strong>Two Layers:</strong> Better! But you need more layers for optimal feature hierarchy. Try adding more layers.</p>';
         } else if (layers === 3) {
-            feedback.innerHTML = '<p><strong>Three Layers:</strong> Good depth! But you need one more layer for optimal feature hierarchy. Try adding a fourth layer.</p>';
+            feedback.innerHTML = '<p><strong>Three Layers:</strong> Good depth! But you need a bit more for optimal feature hierarchy. Try adding another layer.</p>';
         } else if (layers > 4) {
             feedback.className = 'warning';
-            feedback.innerHTML = '<p><strong>Too Deep:</strong> More than 4 layers is unnecessary for this image recognition task. Try reducing to 4 layers.</p>';
+            feedback.innerHTML = '<p><strong>Too Deep:</strong> Too many layers can be unnecessary for this image recognition task. Try reducing layers.</p>';
         } else if (totalNeurons < 6) {
             feedback.innerHTML = '<p><strong>Too Few Neurons:</strong> Your network lacks capacity. Add more neurons for better resolution.</p>';
         } else if (totalNeurons > 15) {
             feedback.className = 'error';
-            feedback.innerHTML = '<p><strong>Overfitting Warning!</strong> Too many neurons! Your network might memorize Kermit but fail on other images. Try around 11 total neurons.</p>';
+            feedback.innerHTML = '<p><strong>Overfitting Warning!</strong> Too many neurons! Your network might memorize Kermit but fail on other images. Try reducing the total number of neurons.</p>';
         } else {
-            feedback.innerHTML = '<p><strong>Close!</strong> You have good depth and reasonable capacity. Try 4 layers with 11 total neurons for the perfect balance.</p>';
+            feedback.innerHTML = '<p><strong>Close!</strong> You have good depth and reasonable capacity. Try balancing more layers with the right amount of neurons.</p>';
         }
     }
 })();
