@@ -1,0 +1,7 @@
+{
+  "editions": ["2026-07-11", "2026-07-12"],
+  "companies_covered": ["Stripe", "Anduril Industries"],
+  "cs_concepts_covered": ["Bloom Filters", "Consistent Hashing"],
+  "poets_used": ["Emily Dickinson", "Robert Frost"],
+  "fun_fact_categories_used": ["politics", "culture", "history", "space", "food", "geography"]
+}

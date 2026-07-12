@@ -14,7 +14,9 @@
                 <a href="#about" class="nav-link active">About</a> |
                 <a href="#essays" class="nav-link">Essays</a> |
                 <a href="#food" class="nav-link">Food</a> |
+                <a href="#daily" class="nav-link">The Daily</a> |
                 <a href="#cookie" id="cookie-link" class="nav-link" style="display:none">Cookie Land</a>
+                <span id="pacman-sep" style="display:none"> | </span><a href="#pacman" id="pacman-link" class="nav-link" style="display:none">Cookie Chomper</a>
             </nav>
             <div class="ticker"><marquee behavior="scroll" direction="left" scrollamount="3"><span id="yay-html" class="ticker-egg">Yay HTML!</span></marquee></div>
         </header>
@@ -26,8 +28,8 @@
                 <h2>About</h2>
                 <div class="about-layout">
                     <div class="about-main">
-                        <p>Hi there, my name is Alex. I'm a student at Claremont McKenna College studying Philosophy and Data Science. Here is my website.</p>
-                        <p>My background is almost exclusively in the humanities, but over the past year or so I've developed a lot of interest in computer science and AI. I've also always loved math and such so that doesn't hurt!</p>
+                        <p>Hi there, my name is Alex. I'm a student at Claremont McKenna College studying Philosophy and Computer Science. Here is my website.</p>
+                        <p>My background is almost exclusively in the humanities, but over the past few years I've developed a lot of interest in computer science and AI.</p>
                         <p>This is not a professional website. Here, I share some random essays I've written and food I've cooked. I hope you enjoy! Also, that is me on the right pretending to be interested in physics --> </p>
                         <p>If you'd like to chat about my essays or anything else, try my <a href="https://www.linkedin.com/in/alexknight2027/">LinkedIn</a>.</p>
                         <p>If you'd like to chat about Arden reach out here <a href="mailto:alex@aredentime.com">alex@aredentime.com</a></p>
@@ -199,6 +201,125 @@
                 </div>
             </section>
 
+            <!-- The Daily Section -->
+            <section id="daily" class="content-section">
+                <h2>The Daily</h2>
+                <p>A long-form daily briefing, generated every morning at 7am: world news, tech &amp; AI, a company deep-dive, a computer science concept explained, a few fun facts, and a poem to close things out. About a 30-minute read. Note, I do not write these briefings -- they are AI-generated.</p>
+                <div class="daily-datenav" id="daily-datenav">
+                    <button type="button" id="daily-prev-btn" class="daily-arrow-btn" onclick="dailyOlder()" aria-label="Older edition">&#8592; Older</button>
+                    <button type="button" id="daily-next-btn" class="daily-arrow-btn" onclick="dailyNewer()" aria-label="Newer edition">Newer &#8594;</button>
+                </div>
+                <div class="daily-editions" id="daily-editions">
+                    <!-- DAILY-ENTRIES-START -->
+                    <div class="daily-edition" id="daily-2026-07-12">
+                        <h3>July 12, 2026</h3>
+                        <div class="daily-content">
+                            <h4>World News</h4>
+                            <p>The gravest story of the week is still unfolding in Venezuela, where the death toll from a pair of earthquakes that struck last week has climbed to 4,333, with roughly 16,740 people injured and thousands more displaced. Rescue crews have pulled 6,462 people from wreckage so far; 856 buildings were damaged and 190 have collapsed outright. At this scale, the numbers stop reading as statistics and start reading as a logistics problem: shelter, clean water, and trauma care for tens of thousands of people, in a country whose institutions were already stretched thin before the ground moved. Watch this one for weeks, not days — the secondary crisis (disease, displacement, strained aid corridors) usually outlasts the earthquake itself.</p>
+                            <p>The Strait of Hormuz situation escalated sharply. Iran's Revolutionary Guard announced it was closing the strait — one of the world's most important oil chokepoints, carrying roughly a fifth of global crude flow — after the US carried out a third round of airstrikes against Iranian targets. Iran responded with waves of strikes across the Gulf, a show of force apparently meant to demonstrate that its strike capability survived the earlier rounds of bombing. A closed or contested Hormuz is the kind of event that shows up in gas prices and shipping insurance rates within days, so if you noticed something odd at the pump this week, this is almost certainly why. The larger question — whether this is a contained exchange or the front edge of something broader — is genuinely unresolved.</p>
+                            <p>On a lighter note, the 2026 World Cup is down to its final four. Jude Bellingham scored twice as England came from behind to beat Norway 2-1 in extra time, punching their ticket to the semifinals. Defending champion Argentina survived a scare of its own, with Julian Alvarez sending them through courtesy of a long-range strike in the 112th minute against Switzerland. Knockout football in extra time has a way of producing exactly this kind of drama — low on chances, high on nerve — and both results set up semifinals that should be worth clearing your evening for.</p>
+                            <p>Spain is still fighting wildfires that broke out last week and have already killed at least 12 people; hundreds of firefighters spent the weekend trying to contain the blazes, with only partial success. And in Canada, a shooting at a festival celebrating Latin culture left at least two people dead and four injured — a grim reminder that mass-gathering violence isn't confined to any one country or season. Taken together, it's a week where the natural world (earthquakes, wildfires) and human conflict (Hormuz, gun violence) both made their presence felt at the same time — which is more the rule than the exception, even if it doesn't always feel that way.</p>
+
+                            <h4>Tech &amp; AI</h4>
+                            <p>The biggest structural story in tech this week is Apple v. OpenAI. Apple filed suit in Northern California federal court on July 11th, alleging trade secret theft, and the complaint is notable for its specificity: it cites more than 400 former Apple employees who now work at OpenAI. Apple isn't framing this as ordinary Silicon Valley talent churn — its argument is that OpenAI ran something closer to a coordinated extraction campaign targeting Apple's silicon engineering, on-device AI, and hardware design teams specifically. Whatever the legal merits turn out to be, the subtext is hard to miss: Apple, which has visibly lagged in the AI race despite its cash and distribution advantages, is now trying to use the courts to slow down a rival that's been hiring away exactly the people Apple would need to catch up.</p>
+                            <p>Meanwhile OpenAI is moving toward the other bookend of the corporate lifecycle: it's preparing a confidential IPO filing, working with Goldman Sachs and Morgan Stanley, targeting a public debut as early as September at a valuation around $730 billion. If that number holds anywhere close to accurate at pricing, it would be the largest tech IPO ever, by a wide margin — a fairly remarkable outcome for a company that was a nonprofit research lab a decade ago. It also puts OpenAI on a very different clock than its private-market peers: public reporting requirements, quarterly scrutiny, and a shareholder base a lot more diverse than venture partners and strategic investors.</p>
+                            <p>On the model side, Gemini 3.5 Pro reaches general availability on July 17th, bringing a 2-million-token context window and a "Deep Think" reasoning mode to Google's flagship line — worth watching for anyone doing long-document or long-codebase work, since context window has quietly become one of the more consequential competitive axes in the field. Grok 4.5 continues to be the price-performance outlier of the current generation, which is an interesting position for xAI to occupy given how young the company is relative to its rivals.</p>
+                            <p>The revenue story is arguably the most underrated headline of the week: Anthropic has overtaken OpenAI on annualized revenue, running at roughly $47 billion compared to OpenAI's projected $25-33 billion for 2026. Claude Code specifically grew from $1 billion to over $2.5 billion in annualized revenue in about two months — a growth rate that would be unusual in almost any software category, let alone one this new. And Meta is pouring more concrete into the ground than anyone: its stock jumped over 7% after an internal memo revealed plans to double the company's total compute by 2027, alongside a freshly announced $10 billion, 1-gigawatt data center in Alberta. Between the compute build-out, the revenue reshuffling among the model labs, and Apple's lawsuit, this is shaping up to be a genuinely consequential stretch for the industry rather than just another news cycle.</p>
+
+                            <h4>Company Deep-Dive: Anduril Industries</h4>
+                            <p>Anduril's origin story starts, oddly enough, with virtual reality. Palmer Luckey built a prototype headset in his parents' garage as a teenager and turned it into Oculus VR, which Facebook acquired in 2014 for roughly $2 billion. It should have been a clean Silicon Valley success story. Instead, Luckey's tenure at Facebook ended in 2017 after he was pushed out following a controversy over his political donations during the 2016 election. Most people in that position would have taken the payout and started another consumer tech company. Luckey did something stranger: he turned his attention to national defense, founding Anduril later that same year alongside Trae Stephens, Matt Grim, Joe Chen, and Brian Schimpf — several of them veterans of Palantir, another company that made its name selling Silicon Valley-style software to the Pentagon.</p>
+                            <p>The founding thesis was blunt, and Luckey has never been shy about stating it plainly: the traditional defense primes — the Lockheeds and Raytheons of the world — didn't have the talent or the incentive structure to build serious AI, autonomy, or robotics, while the companies that did have that talent (Google, Facebook, Apple) were actively refusing to work with the US national security community. Anduril was built to sit in that gap: a defense company run like a product company, hiring from the same talent pool as the consumer tech giants but pointed at a completely different customer.</p>
+                            <p>What's happened since is less a straight line than a widening one. The company's software backbone, Lattice OS, fuses sensor data, AI-driven targeting, and autonomous system coordination across land, sea, and air — and this past March, the US Army signed a 10-year enterprise contract, capped at $2 billion, that consolidates more than 120 separate existing procurement vehicles under the Lattice umbrella. That's a genuinely unusual outcome for defense procurement, which is usually allergic to consolidation. On the hardware side, the Ghost reconnaissance drone has evolved into Ghost-X, a helicopter-style autonomous aircraft combining point-and-click operation with real endurance, while the Fury high-speed combat drone began production three months ahead of schedule this past March.</p>
+                            <p>All of that manufacturing now runs through Arsenal-1, a new factory in Ohio built around a philosophy the company calls "fungibility" — no large fixed robotics, no permanent gantry cranes, nothing that locks the factory into producing one product line. The idea is that Arsenal-1 can shift its production capacity between Fury, Roadrunner, Barracuda, and a classified program as demand moves, rather than needing a separate purpose-built line for each. It's a manufacturing philosophy borrowed more from flexible consumer electronics production than from legacy defense manufacturing, and it's a good example of Anduril importing Silicon Valley operating assumptions into an industry that historically didn't have them.</p>
+                            <p>The financial trajectory has been just as steep. Anduril closed a $5 billion Series H in mid-June, led by Thrive Capital and Andreessen Horowitz, doubling its valuation to $61 billion in the space of twelve months. Revenue doubled year over year to $2.2 billion in 2025 and is projected to reach $4.3 billion in 2026. From garage VR headset, to a $2 billion acquisition, to a forced exit, to a defense company now valued at $61 billion less than a decade after founding — it's a case study in how quickly capital, political will, and a genuine talent-market gap can compound once they line up, and it says something about where a meaningful slice of Silicon Valley's ambition has migrated to over the past several years.</p>
+
+                            <h4>Computer Science Concept: Consistent Hashing</h4>
+                            <p>Here's a problem every large-scale system eventually runs into: you have data spread across N servers, and you assign each piece of data to a server using something like <code>hash(key) mod N</code>. It works fine — until you add or remove a server, at which point N changes, and almost every key gets mapped to a different server than before. In a caching layer, that means nearly the entire cache goes cold at once, right as your system is already under the stress of a topology change. In a distributed database, it means a massive, disruptive data migration triggered by something as routine as scaling up.</p>
+                            <p>Consistent hashing solves this by changing the geometry of the problem. Instead of hashing keys onto a flat range and dividing by the number of servers, both the servers and the keys get hashed onto points on the same circular space — think of a clock face with an enormous number of positions instead of just 12. Each key is assigned to whichever server's position comes next going clockwise around the ring. The payoff shows up exactly when a server joins or leaves: only the keys that fall between the changed server's position and its nearest neighbor on the ring need to move. Everything else on the ring is completely undisturbed. Adding a server that used to trigger a full reshuffle now triggers a local, proportional one — roughly 1/N of the data moves instead of nearly all of it.</p>
+                            <p>The naive version of this ring has its own flaw, though: with only a handful of points scattered randomly around a circle, the arcs between them can be wildly uneven, so one server can end up owning a disproportionate share of the ring purely by chance. The standard fix is virtual nodes — instead of hashing a physical server to one point on the ring, you hash it to many points (a hundred or more), scattered around the circle under different labels. Load balances out across the whole ring rather than a coin-flip, since each physical machine now has statistical safety in numbers rather than depending on one lucky hash value.</p>
+                            <p>This isn't an academic curiosity — it's load-bearing infrastructure. Amazon's DynamoDB paper (2007) is the piece of writing most responsible for popularizing consistent hashing outside of academia, and the technique shows up directly in Cassandra's partitioning layer, in client-side sharding for memcached, and in the request-routing logic of a lot of CDNs and load balancers. Anywhere a system needs to distribute data or traffic across a pool of machines that will predictably grow and shrink over time — which is to say, almost every system built to run at real scale — some version of this idea is quietly doing the work underneath.</p>
+
+                            <h4>Fun Facts</h4>
+                            <ul>
+                                <li><strong>Space:</strong> In January 2026, the James Webb Space Telescope confirmed JADES-GS-z14-0 as the oldest galaxy ever observed, having formed just 290 million years after the Big Bang. The strange part isn't just its age — it's its size. The galaxy is far larger and more mature than current models say a galaxy that young should be able to become, which is forcing astronomers to rethink how quickly galaxies were able to form in the universe's earliest years.</li>
+                                <li><strong>Food:</strong> The Maya and Aztec civilizations valued cacao beans highly enough to use them as literal currency — one bean could reportedly buy a tamale, while about 100 beans could buy a whole turkey hen. Chocolate started its life as money you could also eat, which might be the single best use case any currency has ever had.</li>
+                                <li><strong>Geography:</strong> The town of Baarle, straddling the Netherlands and Belgium, contains 22 Belgian enclaves inside Dutch territory and 7 Dutch counter-enclaves inside those — pieces of the Netherlands, inside Belgium, inside the Netherlands. A house's nationality is determined by where its front door sits, and residents have genuinely moved their front doors to change which country they legally live in.</li>
+                            </ul>
+
+                            <h4>Poem: The Road Not Taken — Robert Frost</h4>
+                            <p>Two roads diverged in a yellow wood,<br>
+                            And sorry I could not travel both<br>
+                            And be one traveler, long I stood<br>
+                            And looked down one as far as I could<br>
+                            To where it bent in the undergrowth;</p>
+                            <p>Then took the other, as just as fair,<br>
+                            And having perhaps the better claim,<br>
+                            Because it was grassy and wanted wear;<br>
+                            Though as for that the passing there<br>
+                            Had worn them really about the same,</p>
+                            <p>And both that morning equally lay<br>
+                            In leaves no step had trodden black.<br>
+                            Oh, I kept the first for another day!<br>
+                            Yet knowing how way leads on to way,<br>
+                            I doubted if I should ever come back.</p>
+                            <p>I shall be telling this with a sigh<br>
+                            Somewhere ages and ages hence:<br>
+                            Two roads diverged in a wood, and I—<br>
+                            I took the one less traveled by,<br>
+                            And that has made all the difference.</p>
+                            <p style="text-align: right;"><em>—Robert Frost, 1916 (from </em>Mountain Interval<em>, public domain)</em></p>
+                        </div>
+                    </div>
+                    <div class="daily-edition" id="daily-2026-07-11">
+                        <h3>July 11, 2026</h3>
+                        <div class="daily-content">
+                            <h4>World News</h4>
+                            <p>Politics delivered one of the more unusual milestones of the year: Rob Jetten was sworn in as prime minister of the Netherlands, becoming both the youngest and the first openly gay person to hold the office in Dutch history. It's the kind of "first" that tends to get a single day of headlines and then quietly become a fact people cite for decades — a reminder that generational turnover in leadership rosters is still working its way through even the countries that look, from the outside, like they settled these questions long ago.</p>
+                            <p>The United States marked its 250th anniversary on July 4th — the semiquincentennial of the Declaration of Independence — with a time capsule buried at Philadelphia's Independence National Historical Park. It's stocked with contributions from all three branches of the federal government plus every state and territory, meant to be opened by a country that, by the time it's unsealed, will have spent as much time past this moment as the founding generation spent building toward it. There's something clarifying about a 250-year birthday: institutions that feel permanent are still, on a long enough timescale, relatively young experiments.</p>
+                            <p>On the sports and culture side, the 2026 FIFA World Cup made history simply by existing in its current form — the first edition ever hosted across three nations (the US, Mexico, and Canada) and the first to expand to 48 teams, alongside record attendance figures for the tournament. Tournaments this size have a way of reshaping host-city infrastructure and broadcast economics well past the closing match, so the ripple effects here are likely to outlast the trophy presentation by years.</p>
+
+                            <h4>Tech &amp; AI</h4>
+                            <p>Compute and capital continue to be the two resources every major AI lab is racing to lock down simultaneously, and this week reinforced that the race has no signs of slowing. The pattern across labs remains the same: raise at an eye-widening valuation, commit the proceeds almost entirely to data centers and chips, and treat model releases as the visible tip of an iceberg whose real mass is in physical infrastructure most people never see. It's worth remembering, reading any single day's AI headlines, that the actual constraint on the industry right now isn't ideas — it's how many GPUs you can get power to.</p>
+                            <p>Enterprise adoption of AI coding tools has also kept compounding rather than plateauing, with usage-based revenue for the category growing at rates that would be unusual for any software segment at this stage of maturity. The signal worth watching isn't any single company's number — it's that the growth curve still looks exponential rather than S-curving, which suggests the market is still expanding rather than just being redistributed among incumbents.</p>
+
+                            <h4>Company Deep-Dive: Stripe</h4>
+                            <p>Stripe's founders, Patrick and John Collison, grew up in the small village of Dromineer in County Tipperary, Ireland — not the typical geography for a Silicon Valley origin story. Patrick was precocious early: at sixteen he won Ireland's Young Scientist of the Year award for work on Lisp, and by his first quarter of college he'd already founded a startup, Auctomatic, joining Y Combinator's Winter 2007 batch. He and John — then just seventeen — sold that company on Good Friday of 2008, becoming millionaires before most of their peers had picked a major.</p>
+                            <p>They could have coasted. Instead, they built a rougher prototype in Buenos Aires in late 2009 called "/dev/payments" — a deliberately unglamorous, engineer's name for what became Stripe. The idea was almost embarrassingly simple stated plainly: accepting online payments as a small business was still, in 2009, a miserable, multi-week process involving merchant banks and legacy processors. Stripe's pitch was that it should take a few lines of code and an afternoon. They launched publicly in September 2011 after a private beta, backed by Y Combinator's initial $20-30k and then a $2 million round from an unusually starry list — Peter Thiel, Elon Musk, Sequoia, and Andreessen Horowitz all in the same check.</p>
+                            <p>The evolution since is a study in scope creep done right. What began as a single API endpoint for card payments has grown into a full financial infrastructure stack: Atlas (incorporate a company from anywhere), Radar (fraud detection), Capital (business loans underwritten off payments data), Treasury (banking-as-a-service), and a large enterprise sales motion serving companies that would once have considered Stripe too small to trust with their volume. Gross revenue grew from $4.0 billion in 2023 to $5.1 billion in 2024 — a 27.5% jump for a company already well past its startup phase. The Collisons still run it, still own significant stakes, and the company remains a reference case for how far a single, narrow, well-executed idea can expand once it earns the right to ask customers for more of their financial stack.</p>
+
+                            <h4>Computer Science Concept: Bloom Filters</h4>
+                            <p>Suppose you need to answer one very narrow question, over and over, at massive speed: "have I possibly seen this item before?" — checking a username against millions already registered, or checking whether a URL is on a huge blocklist, or deciding whether it's worth hitting a slow database at all. Storing every item in a hash set works, but at scale the memory cost becomes real, and a lot of that memory is being spent just to answer a yes/no question.</p>
+                            <p>A Bloom filter trades certainty for space. It's a fixed-size bit array, all zeros to start, plus a handful of independent hash functions. To add an item, you run it through each hash function and flip the corresponding bit to 1 — so one item lights up several bits scattered across the array. To check whether an item was added, you hash it the same way and look at those same positions: if any of them is still 0, the item was definitely never added. If all of them are 1, the item was probably added — but you can't be completely sure, because some other combination of items could have coincidentally flipped exactly those same bits.</p>
+                            <p>That's the core trade: a Bloom filter can produce false positives ("probably seen" when it wasn't) but never false negatives ("definitely not seen" is always correct). That one-directional guarantee turns out to be exactly what you need for a huge class of problems — you use the filter as a cheap first check, and only pay the cost of the slow, definitive lookup (the real database, the real disk read) when the filter says "maybe." Chrome's Safe Browsing feature used exactly this pattern for years to check URLs against a huge malicious-site list without downloading or querying the whole list on every page load. Cassandra and HBase use Bloom filters to avoid disk reads for keys that definitely aren't in a given data file. The general lesson underneath the specific structure: when a wrong "maybe" is cheap and a wrong "definitely not" would be catastrophic, you can often buy enormous space savings by allowing exactly the kind of error your system can tolerate.</p>
+
+                            <h4>Fun Facts</h4>
+                            <ul>
+                                <li><strong>Politics:</strong> Rob Jetten was sworn in as prime minister of the Netherlands this year, becoming both the youngest person and the first openly gay person to hold the office in the country's history.</li>
+                                <li><strong>Culture:</strong> "Michael," a film about Michael Jackson's early career, became the second-highest-grossing music biopic ever made, pulling in more than $600 million globally.</li>
+                                <li><strong>History:</strong> On July 4, 2026, the United States marked the 250th anniversary of the Declaration of Independence by burying a time capsule at Independence National Historical Park containing contributions from all three branches of the federal government and every state and territory.</li>
+                            </ul>
+
+                            <h4>Poem: "Hope" is the thing with feathers — Emily Dickinson</h4>
+                            <p>"Hope" is the thing with feathers -<br>
+                            That perches in the soul -<br>
+                            And sings the tune without the words -<br>
+                            And never stops - at all -</p>
+                            <p>And sweetest - in the Gale - is heard -<br>
+                            And sore must be the storm -<br>
+                            That could abash the little Bird<br>
+                            That kept so many warm -</p>
+                            <p>I've heard it in the chillest land -<br>
+                            And on the strangest Sea -<br>
+                            Yet - never - in Extremity,<br>
+                            It asked a crumb - of me.</p>
+                            <p style="text-align: right;"><em>—Emily Dickinson, c. 1861 (public domain)</em></p>
+                        </div>
+                    </div>
+                    <!-- Full editions inserted here automatically each morning, most recent first. Do not remove this comment block. -->
+                    <!-- DAILY-ENTRIES-END -->
+                </div>
+            </section>
+
             <!-- Cookie Land (hidden unless unlocked) -->
             <section id="cookie" class="content-section">
                 <h2>COOKIE LAND</h2>
@@ -333,6 +454,28 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Cookie Chomper (Pac-Man) — its own tab, unlocked after the neural net -->
+            <section id="pacman" class="content-section">
+                <h2>COOKIE CHOMPER</h2>
+                <p>Cookie Monster escaped into the maze! Gobble every cookie, dodge the gang, and grab the Easter eggs for bonus points. Eat a big cookie to turn the tables and chomp them right back.</p>
+                <p style="font-size:12px; color:#666; margin:4px 0 12px;">Controls: Arrow keys or WASD to move. Press R to restart when a round ends.</p>
+
+                <!-- Pre-game panel -->
+                <div id="pacman-intro" style="border:1px solid #666; padding:18px; background:#f9f9f9; text-align:center;">
+                    <p style="margin:0 0 12px;"><strong>Ready to help Cookie Monster escape the maze?</strong></p>
+                    <button id="pacman-start" class="idea-btn" style="font-size:16px; padding:8px 22px;">▶ Start Game</button>
+                </div>
+
+                <!-- Game panel (revealed on Start) -->
+                <div id="pacman-game" style="display:none;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+                        <div id="pacman-hud" style="font-family:'Courier New',monospace; font-size:13px;"></div>
+                        <button id="pacman-restart" class="idea-btn" style="font-size:12px;">Restart</button>
+                    </div>
+                    <canvas id="pacman-canvas" tabindex="0" style="border:2px solid #000; background:#000; max-width:100%; image-rendering:auto; outline:none;"></canvas>
+                </div>
+            </section>
         </main>
 
         <footer>
@@ -396,5 +539,6 @@
     </div>
 
     <script src="script.js"></script>
+    <script src="pacman.js"></script>
 </body>
 </html> 

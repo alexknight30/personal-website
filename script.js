@@ -430,8 +430,43 @@ function toggleEssay(element) {
     }
 }
 
+// Daily arrow-navigator — steps through "The Daily" editions one at a time.
+// Editions live in #daily-editions in DOM order, newest first (index 0 = today).
+// This scales to any number of editions without needing one button per day.
+let dailyIndex = 0;
+
+function dailyRenderState() {
+    const editions = document.querySelectorAll('#daily-editions .daily-edition');
+    editions.forEach((el, i) => el.classList.toggle('active', i === dailyIndex));
+    const prevBtn = document.getElementById('daily-prev-btn');
+    const nextBtn = document.getElementById('daily-next-btn');
+    if (prevBtn) prevBtn.disabled = editions.length === 0 || dailyIndex >= editions.length - 1;
+    if (nextBtn) nextBtn.disabled = dailyIndex <= 0;
+}
+
+function dailyOlder() {
+    const editions = document.querySelectorAll('#daily-editions .daily-edition');
+    if (dailyIndex < editions.length - 1) {
+        dailyIndex += 1;
+        dailyRenderState();
+    }
+}
+
+function dailyNewer() {
+    if (dailyIndex > 0) {
+        dailyIndex -= 1;
+        dailyRenderState();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', dailyRenderState);
+
 // Add keyboard navigation support
 document.addEventListener('keydown', function(e) {
+    // Do not hijack arrow keys when the Pac-Man game is running — let it steer.
+    if (window.__pacmanActive) {
+        return;
+    }
     // Do not hijack arrow keys when focused inside inputs or textareas
     const active = document.activeElement;
     if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.isContentEditable)) {
@@ -916,7 +951,16 @@ document.addEventListener('click', function(e) {
                 const continueBtn = document.getElementById('continue-button');
                 if (continueBtn) {
                     continueBtn.addEventListener('click', function() {
-                        feedback.innerHTML = '<div style="text-align: center; padding: 20px; border: 2px solid #4CAF50; border-radius: 8px; background: #f9f9f9;"><p><strong>This is a work in progress.</strong></p><p>More puzzles to follow soon...</p></div>';
+                        feedback.innerHTML = '<div style="text-align: center; padding: 20px; border: 2px solid #4CAF50; border-radius: 8px; background: #f9f9f9;"><p><strong>Found him! Kermit says hi.</strong></p><p>But wait—Cookie Monster just bolted into a maze... follow him to <em>Cookie Chomper</em>!</p></div>';
+                        // Unlock and switch to the Cookie Chomper tab
+                        const sep = document.getElementById('pacman-sep');
+                        const pacLink = document.getElementById('pacman-link');
+                        if (sep) sep.style.display = 'inline';
+                        if (pacLink) {
+                            pacLink.style.display = 'inline';
+                            pacLink.click();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
                     });
                 }
             }, 100);

@@ -359,6 +359,88 @@ header h1 {
     gap: 10px;
 }
 
+/* Daily date navigator (arrow-based, scales to any number of editions) */
+.daily-datenav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #ccc;
+}
+
+.daily-arrow-btn {
+    padding: 6px 14px;
+    background: #e6e6e6;
+    color: #000;
+    border: 1px solid #666;
+    border-radius: 2px;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.daily-arrow-btn:hover:not(:disabled) {
+    background: #d4d4d4;
+}
+
+.daily-arrow-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+/* Daily editions (one visible at a time) */
+.daily-editions {
+    margin-top: 10px;
+}
+
+.daily-edition {
+    display: none;
+}
+
+.daily-edition.active {
+    display: block;
+}
+
+.daily-edition h3 {
+    font-size: 18px;
+    font-weight: normal;
+    margin-bottom: 15px;
+}
+
+.daily-content {
+    margin-top: 10px;
+}
+
+.daily-content p {
+    margin-bottom: 12px;
+}
+
+.daily-content em {
+    font-style: normal;
+    color: #666;
+}
+
+.daily-content h4 {
+    margin: 20px 0 10px 0;
+    font-size: 16px;
+    color: #000;
+    font-weight: 600;
+}
+
+.daily-content h4:first-child {
+    margin-top: 0;
+}
+
+.daily-content ul {
+    margin: 0 0 10px 0;
+    padding-left: 20px;
+}
+
+.daily-content li {
+    margin-bottom: 6px;
+}
+
 .pdf-link {
     display: inline-flex;
     align-items: center;
