@@ -1,7 +1,7 @@
 {
-  "editions": ["2026-07-11", "2026-07-12", "2026-07-13"],
-  "companies_covered": ["Stripe", "Anduril Industries", "Palantir Technologies"],
-  "cs_concepts_covered": ["Bloom Filters", "Consistent Hashing", "CAP Theorem"],
-  "poets_used": ["Emily Dickinson", "Robert Frost", "Walt Whitman"],
-  "fun_fact_categories_used": ["politics", "culture", "history", "space", "food", "geography", "science", "politics", "history"]
+  "editions": ["2026-07-11", "2026-07-12", "2026-07-13", "2026-07-15"],
+  "companies_covered": ["Stripe", "Anduril Industries", "Palantir Technologies", "Discord"],
+  "cs_concepts_covered": ["Bloom Filters", "Consistent Hashing", "CAP Theorem", "Raft Consensus Algorithm"],
+  "poets_used": ["Emily Dickinson", "Robert Frost", "Walt Whitman", "Carl Sandburg"],
+  "fun_fact_categories_used": ["politics", "culture", "history", "space", "food", "geography", "science", "politics", "history", "space", "geography", "culture"]
 }
