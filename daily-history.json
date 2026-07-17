@@ -1,7 +1,7 @@
 {
-  "editions": ["2026-07-11", "2026-07-12", "2026-07-13", "2026-07-15", "2026-07-16"],
-  "companies_covered": ["Stripe", "Anduril Industries", "Palantir Technologies", "Discord", "Databricks"],
-  "cs_concepts_covered": ["Bloom Filters", "Consistent Hashing", "CAP Theorem", "Raft Consensus Algorithm", "Log-Structured Merge-Trees (LSM-Trees)"],
-  "poets_used": ["Emily Dickinson", "Robert Frost", "Walt Whitman", "Carl Sandburg", "Paul Laurence Dunbar"],
-  "fun_fact_categories_used": ["politics", "culture", "history", "space", "food", "geography", "science", "politics", "history", "space", "geography", "culture", "food", "science", "history"]
+  "editions": ["2026-07-11", "2026-07-12", "2026-07-13", "2026-07-15", "2026-07-16", "2026-07-17"],
+  "companies_covered": ["Stripe", "Anduril Industries", "Palantir Technologies", "Discord", "Databricks", "Slack"],
+  "cs_concepts_covered": ["Bloom Filters", "Consistent Hashing", "CAP Theorem", "Raft Consensus Algorithm", "Log-Structured Merge-Trees (LSM-Trees)", "B-Trees"],
+  "poets_used": ["Emily Dickinson", "Robert Frost", "Walt Whitman", "Carl Sandburg", "Paul Laurence Dunbar", "Sara Teasdale"],
+  "fun_fact_categories_used": ["politics", "culture", "history", "space", "food", "geography", "science", "politics", "history", "space", "geography", "culture", "food", "science", "history", "space", "geography", "culture"]
 }
